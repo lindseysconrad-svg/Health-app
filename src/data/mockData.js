@@ -289,6 +289,256 @@ export const therapyHistory = [
   { date: fmt(today), coldPlunge: [{ tempF: 50, durationMin: 3, time: '7:30 AM', feeling: 4 }],                    sauna: [] },
 ];
 
+// ─── Peptide profiles (full tracker data) ─────────────────────────────────────
+export const peptideProfiles = [
+  {
+    id: 'bpc157',
+    name: 'BPC-157',
+    shortName: 'BPC',
+    color: '#2ef88b',
+    icon: '🔬',
+    category: 'Healing & Repair',
+    protocol: {
+      dose: '250 mcg', frequency: 'Daily', route: 'SubQ',
+      timing: 'Morning, fasted', injectionSite: 'Abdomen / near knee',
+      cycleWeeks: 6, breakWeeks: 2, cycleDay: 23, cycleDays: 42,
+      status: 'active', startDate: daysAgo(22),
+    },
+    goals: ['Knee tendon repair', 'Gut health', 'Anti-inflammatory'],
+    metricsOn:  { hrv: 65, recovery: 81, sleepScore: 85, rhr: 51 },
+    metricsOff: { hrv: 54, recovery: 68, sleepScore: 77, rhr: 55 },
+    adherence: 92,
+    effectivenessRating: 8,
+    // 30-day feel ratings (1–5)
+    feelHistory: [3,4,4,5,4,4,5,4,4,5,4,5,5,4,4,5,4,4,5,4,5,4,5,4,5,4,4,5,4,4],
+    notes: [
+      { date: daysAgo(20), text: 'Started the cycle. First 3 days had mild nausea, passed quickly.' },
+      { date: daysAgo(14), text: 'Knee pain significantly reduced. Better mobility during squats and lunges.' },
+      { date: daysAgo(7),  text: 'Gut noticeably better — less bloating after meals. Sleep feels deeper too.' },
+      { date: daysAgo(2),  text: 'Energy during workouts cleaner. Recovering faster between sessions.' },
+    ],
+    sideEffects: [
+      { date: daysAgo(20), effect: 'Mild nausea', resolved: true, duration: '3 days' },
+    ],
+    research: {
+      mechanism: 'Derived from gastric juice protein BPC. Promotes angiogenesis, upregulates GH receptors, modulates nitric oxide synthase, accelerates actin and tubulin polymerization for tissue repair.',
+      primaryBenefits: ['Tendon & ligament repair', 'Gut barrier healing (leaky gut, IBD)', 'Systemic anti-inflammatory', 'Neuroprotective effects', 'Wound healing', 'Joint mobility'],
+      evidenceLevel: 'Strong animal data, extensive anecdotal human reports, limited human RCTs',
+      halfLife: '~4 hours',
+      stacksWith: ['TB-500', 'Ipamorelin / CJC-1295'],
+      avoidWith: ['NSAIDs (may blunt angiogenesis)'],
+      protocolNotes: 'Morning fasted for systemic effect. Inject near injury site for localized healing. Standard cycle: 6 weeks on, 2 weeks off.',
+    },
+  },
+  {
+    id: 'tb500',
+    name: 'TB-500',
+    shortName: 'TB',
+    color: '#60a5fa',
+    icon: '🛡️',
+    category: 'Recovery & Flexibility',
+    protocol: {
+      dose: '2.5 mg', frequency: '2× / week', route: 'SubQ',
+      timing: 'Morning', injectionSite: 'Abdomen',
+      cycleWeeks: 6, breakWeeks: 4, cycleDay: 23, cycleDays: 42,
+      status: 'active', startDate: daysAgo(22),
+    },
+    goals: ['Full-body recovery', 'Flexibility', 'Reduce inflammation'],
+    metricsOn:  { hrv: 64, recovery: 79, sleepScore: 83, rhr: 51 },
+    metricsOff: { hrv: 57, recovery: 72, sleepScore: 79, rhr: 53 },
+    adherence: 95,
+    effectivenessRating: 7,
+    feelHistory: [4,4,3,4,5,4,4,5,4,4,5,5,4,4,5,4,4,5,4,5,4,5,4,5,4,4,5,4,4,4],
+    notes: [
+      { date: daysAgo(18), text: 'Hip tightness improving. Noticeably more flexible post-run.' },
+      { date: daysAgo(10), text: 'Delayed onset muscle soreness much less than usual after heavy leg day.' },
+      { date: daysAgo(3),  text: 'Feeling like my body recovers overnight now. WHOOP recovery scores up.' },
+    ],
+    sideEffects: [],
+    research: {
+      mechanism: 'Synthetic version of Thymosin Beta-4. Promotes actin sequestration (cell migration), angiogenesis, anti-apoptotic effects. Upregulates metalloproteinases and VEGF.',
+      primaryBenefits: ['Full-body tissue repair', 'Flexibility & mobility', 'Reduced DOMS', 'Cardiovascular repair', 'Hair growth (anecdotal)', 'Immune modulation'],
+      evidenceLevel: 'Good animal data, strong anecdotal human evidence',
+      halfLife: '~3–7 days (longer than BPC-157)',
+      stacksWith: ['BPC-157', 'GH peptides'],
+      avoidWith: [],
+      protocolNotes: 'Loading phase: 2–2.5mg 2×/week for 4–6 weeks. Maintenance: 2mg once weekly. Stack with BPC-157 for synergistic healing.',
+    },
+  },
+  {
+    id: 'sermorelin',
+    name: 'Sermorelin',
+    shortName: 'SERM',
+    color: '#a78bfa',
+    icon: '🌙',
+    category: 'Growth Hormone / Sleep',
+    protocol: {
+      dose: '300 mcg', frequency: 'Daily', route: 'SubQ',
+      timing: 'Before bed, empty stomach', injectionSite: 'Abdomen',
+      cycleWeeks: 12, breakWeeks: 4, cycleDay: 23, cycleDays: 84,
+      status: 'active', startDate: daysAgo(22),
+    },
+    goals: ['Deeper sleep', 'GH release', 'Body recomposition'],
+    metricsOn:  { hrv: 66, recovery: 82, sleepScore: 88, rhr: 51 },
+    metricsOff: { hrv: 55, recovery: 69, sleepScore: 76, rhr: 54 },
+    adherence: 88,
+    effectivenessRating: 9,
+    feelHistory: [3,3,4,4,5,5,4,5,5,4,5,5,5,4,5,5,4,5,4,5,5,5,4,5,5,4,5,4,5,5],
+    notes: [
+      { date: daysAgo(21), text: 'First week: vivid dreams, sleeping through the night more consistently.' },
+      { date: daysAgo(14), text: 'Waking up feeling genuinely rested. Sleep score averaging 87 vs 79 before.' },
+      { date: daysAgo(7),  text: 'Body composition changing — leaner through midsection. Strength up in gym.' },
+      { date: daysAgo(1),  text: 'HRV tracking noticeably higher on days I take it before bed. Clear correlation.' },
+    ],
+    sideEffects: [
+      { date: daysAgo(19), effect: 'Vivid/intense dreams', resolved: false, duration: 'Ongoing (not unwanted)' },
+      { date: daysAgo(20), effect: 'Tingling at injection site', resolved: true, duration: '1 week' },
+    ],
+    research: {
+      mechanism: 'GHRH analogue that stimulates the pituitary to release natural GH in a pulsatile fashion. More physiological than exogenous GH. Preserves pituitary feedback loop.',
+      primaryBenefits: ['Deeper SWS and REM sleep', 'Natural GH pulse stimulation', 'Fat oxidation / body recomposition', 'Muscle recovery', 'Anti-aging effects', 'IGF-1 upregulation'],
+      evidenceLevel: 'FDA-approved (formerly), strong human clinical data',
+      halfLife: '10–20 minutes (triggers GH pulse for 3–4 hours)',
+      stacksWith: ['Ipamorelin (synergistic — GHRH + GHRP)', 'BPC-157'],
+      avoidWith: ['Eating within 2–3h of injection (blunts GH release)', 'High-carb meals before bed'],
+      protocolNotes: 'Must be on empty stomach 2–3h post-meal. Inject 30–60 min before bed. GH release peaks during first SWS cycle. Cycle 3 months on, 1 month off.',
+    },
+  },
+  {
+    id: 'pt141',
+    name: 'PT-141',
+    shortName: 'PT',
+    color: '#f5a623',
+    icon: '⚡',
+    category: 'Libido / Vitality',
+    protocol: {
+      dose: '1 mg', frequency: 'As needed', route: 'Nasal spray',
+      timing: '45–90 min before activity', injectionSite: 'N/A',
+      cycleWeeks: null, breakWeeks: null, cycleDay: null, cycleDays: null,
+      status: 'as-needed', startDate: daysAgo(30),
+    },
+    goals: ['Libido enhancement', 'Sexual function', 'Vitality'],
+    metricsOn:  { hrv: 61, recovery: 77, sleepScore: 81, rhr: 52 },
+    metricsOff: { hrv: 60, recovery: 75, sleepScore: 82, rhr: 52 },
+    adherence: null,
+    effectivenessRating: 8,
+    feelHistory: [null,null,null,4,null,null,null,4,null,null,null,null,5,null,null,null,4,null,null,null,null,5,null,null,4,null,null,null,null,4],
+    notes: [
+      { date: daysAgo(25), text: 'First use: strong effect ~60 min in. Flushing / warm sensation for 2h.' },
+      { date: daysAgo(10), text: 'Lowered to 0.75mg — good effect with less flushing. May be optimal dose.' },
+    ],
+    sideEffects: [
+      { date: daysAgo(25), effect: 'Facial flushing', resolved: false, duration: '2–3 hours per use' },
+      { date: daysAgo(25), effect: 'Mild nausea first use', resolved: true, duration: '1 hour' },
+    ],
+    research: {
+      mechanism: 'Melanocortin receptor agonist (MC3R/MC4R). Acts centrally on hypothalamus to stimulate sexual arousal — distinct from PDE5 inhibitors which act peripherally.',
+      primaryBenefits: ['Libido enhancement (men & women)', 'Spontaneous arousal', 'May work where ED drugs fail', 'Energy & motivation'],
+      evidenceLevel: 'Phase II/III human trials completed, strong anecdotal base',
+      halfLife: '~2 hours (nasal), longer SubQ',
+      stacksWith: ['Sermorelin (vitality stack)'],
+      avoidWith: ['High doses (nausea risk)', 'Daily use (receptor desensitization)'],
+      protocolNotes: 'Start at 0.5–1mg. Use as needed, avoid daily use to prevent desensitization. Nasal spray: 45–90 min onset. Effect lasts 4–6h.',
+    },
+  },
+];
+
+// ─── Testosterone ─────────────────────────────────────────────────────────────
+export const testosteroneProfile = {
+  compound: 'Testosterone Cypionate',
+  dose: 150,         // mg
+  unit: 'mg',
+  frequency: 'Weekly',
+  route: 'SubQ',
+  injectionSite: 'Abdomen / quad alternating',
+  timing: 'Monday morning',
+  nextInjection: daysAgo(-4),  // 4 days from now
+  dayOfWeek: 'Monday',
+  lastInjection: daysAgo(3),
+  cycleType: 'TRT',            // TRT | blast | cruise
+  weeklyDose: 150,
+  // How you feel at different points in the cycle
+  protocol: 'Once weekly. May split to twice weekly (75mg E3.5D) for more stable levels.',
+  labs: {
+    totalT:    820,  // ng/dL (last check)
+    freeT:     18.4, // pg/mL
+    estradiol: 28,   // pg/mL
+    shbg:      32,   // nmol/L
+    hematocrit:45,   // %
+    psa:       0.6,  // ng/mL
+    lastLabDate: daysAgo(28),
+  },
+  feelHistory: [  // weekly feel ratings over last 12 weeks (1-5)
+    4, 5, 4, 5, 5, 4, 4, 5, 4, 4, 5, 4,
+  ],
+  weeklyNotes: [
+    { week: 'Week 10', note: 'Strength PRs on bench and deadlift. Libido excellent.' },
+    { week: 'Week 11', note: 'Felt a bit sluggish days 5-7 post injection. Consider splitting dose.' },
+    { week: 'Week 12', note: 'Back to good. Energy and recovery both solid.' },
+  ],
+  supportCompounds: [
+    { name: 'Anastrozole', dose: '0.25mg', timing: 'E3D (as needed)', purpose: 'Estrogen control' },
+    { name: 'HCG', dose: '500 IU', timing: '2× / week', purpose: 'Testicular function / fertility' },
+  ],
+  metricsOn:  { hrv: 64, recovery: 80, libido: 9, strength: 8 },
+  metricsBaseline: { hrv: 52, recovery: 68, libido: 6, strength: 7 },
+};
+
+// ─── Caffeine log ────────────────────────────────────────────────────────────
+export const caffeineProfile = {
+  dailyGoal: 300,   // mg — cutoff at noon recommended for HRV
+  todayEntries: [
+    { id: 1, time: '6:15 AM', source: 'Black coffee', amount: 160, logged: true },
+    { id: 2, time: '7:00 AM', source: 'Pre-workout (C4)', amount: 200, logged: true },
+    { id: 3, time: '12:00 PM', source: 'Espresso shot', amount: 75, logged: false },
+  ],
+  weeklyAvgMg: 310,
+  cutoffHour: 14, // 2 PM recommended
+  // Impact on metrics when caffeine consumed after noon
+  afterNoonImpact: { hrvDelta: -8, sleepScoreDelta: -11, remDelta: -0.4 },
+};
+
+// ─── Electrolytes (LMNT / salt) ──────────────────────────────────────────────
+export const electrolyteProfile = {
+  brand: 'LMNT',
+  altBrands: ['Redmond Re-Lyte', 'Bulk sea salt'],
+  perPacket: { sodium: 1000, potassium: 200, magnesium: 60 }, // mg
+  todayPackets: [
+    { id: 1, time: '6:00 AM', flavor: 'Citrus Salt', packets: 1, context: 'Morning / fasted', logged: true },
+    { id: 2, time: '7:30 AM', flavor: 'Watermelon Salt', packets: 1, context: 'Post-workout', logged: true },
+  ],
+  goal: 2, // packets per day
+  weeklyAvg: 1.8,
+  benefits: ['Electrolyte balance during fasting', 'Hydration', 'Muscle cramps prevention', 'Blood pressure / sodium for low-carb'],
+};
+
+// ─── Expanded supplements ─────────────────────────────────────────────────────
+export const supplementProfiles = [
+  { id: 1,  name: 'Creatine Monohydrate', dose: '5g',      timing: 'Post-workout', logged: true,  color: '#2ef88b', icon: '💪', purpose: 'Strength, power output, cellular energy',         timeLogged: '8:30 AM' },
+  { id: 2,  name: 'Magnesium Glycinate',  dose: '400mg',   timing: 'Before bed',   logged: false, color: '#a78bfa', icon: '😴', purpose: 'Sleep quality, muscle relaxation, HRV',             timeLogged: null },
+  { id: 3,  name: 'Vitamin D3 + K2',     dose: '5000 IU', timing: 'Morning',      logged: true,  color: '#f5a623', icon: '☀️', purpose: 'Testosterone support, immune, bone density',         timeLogged: '7:00 AM' },
+  { id: 4,  name: 'Omega-3 Fish Oil',    dose: '2g EPA/DHA', timing: 'With meal', logged: true,  color: '#60a5fa', icon: '🐟', purpose: 'Inflammation, cardiovascular, joint health',          timeLogged: '8:00 AM' },
+  { id: 5,  name: 'NMN',                 dose: '500mg',   timing: 'Morning, fasted', logged: true, color: '#2ef88b', icon: '🧬', purpose: 'NAD+ boost, mitochondrial, anti-aging',             timeLogged: '6:30 AM' },
+  { id: 6,  name: 'Ashwagandha (KSM-66)',dose: '600mg',   timing: 'Night',        logged: false, color: '#f97316', icon: '🌿', purpose: 'Cortisol reduction, testosterone, stress',            timeLogged: null },
+  { id: 7,  name: 'Zinc + Copper',       dose: '30mg/2mg', timing: 'Night',       logged: false, color: '#f5a623', icon: '⚡', purpose: 'Testosterone support, immune, enzyme function',       timeLogged: null },
+  { id: 8,  name: 'Berberine',           dose: '500mg',   timing: 'With meals ×2', logged: true, color: '#84cc16', icon: '🌱', purpose: 'Blood sugar, metabolic health (like metformin)',      timeLogged: '8:00 AM' },
+  { id: 9,  name: 'Coenzyme Q10',        dose: '200mg',   timing: 'Morning',      logged: true,  color: '#f5a623', icon: '⚡', purpose: 'Mitochondrial, cardiovascular, energy',               timeLogged: '7:00 AM' },
+  { id: 10, name: 'Shilajit',            dose: '500mg',   timing: 'Morning',      logged: false, color: '#92400e', icon: '🪨', purpose: 'Testosterone boost, fulvic acid, energy, HRV',        timeLogged: null },
+];
+
+// ─── Calendar adherence (30 days × each peptide) ─────────────────────────────
+// 1 = taken, 0 = not taken / not scheduled
+const makeAdherence = (pattern) =>
+  Array.from({ length: 30 }, (_, i) => pattern[i % pattern.length]);
+
+export const peptideCalendar = Array.from({ length: 30 }, (_, i) => ({
+  date: daysAgo(29 - i),
+  bpc157:    i >= 7  ? (Math.random() > 0.08 ? 1 : 0) : 0,   // started day 8 of window
+  tb500:     i >= 7  ? ([0,1,0,0,1,0,1][i % 7] ? 1 : 0) : 0, // 2–3× week
+  sermorelin:i >= 7  ? (Math.random() > 0.12 ? 1 : 0) : 0,
+  pt141:     [0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,1,0,0,0,0,1][i],
+}));
+
 // ─── Peptide log ─────────────────────────────────────────────────────────────
 export const peptideLog = [
   { date: daysAgo(1), name: 'BPC-157',    dose: '250 mcg', route: 'SubQ', logged: true },
