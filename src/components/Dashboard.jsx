@@ -1,9 +1,23 @@
 import RecoveryRing from './RecoveryRing';
 import ProgressBar from './ProgressBar';
 import { todayStats, therapyHistory, weekSummary } from '../data/mockData';
+import { useWhoop } from '../context/WhoopContext';
 
 export default function Dashboard() {
-  const { recovery, sleep, strain, nutrition } = todayStats;
+  const { liveData, disconnect } = useWhoop();
+
+  // Merge live WHOOP data over mock data — WHOOP wins on fields it provides
+  const recovery = liveData?.recovery
+    ? { ...todayStats.recovery, ...liveData.recovery }
+    : todayStats.recovery;
+  const sleep = liveData?.sleep
+    ? { ...todayStats.sleep, ...liveData.sleep }
+    : todayStats.sleep;
+  const strainBase = todayStats.strain;
+  const activities = liveData?.workouts?.length ? liveData.workouts : strainBase.activities;
+  const dayStrain  = liveData?.cycles?.[0]?.strain ?? strainBase.score;
+  const strain = { ...strainBase, score: dayStrain, activities };
+  const { nutrition } = todayStats;
   const sc = strain.score;
   const strainColor = sc >= 14 ? '#ef4444' : sc >= 10 ? '#f5a623' : '#60a5fa';
   const todayTherapy = therapyHistory.at(-1);
@@ -23,12 +37,16 @@ export default function Dashboard() {
           </p>
           <h1 style={{ fontSize: 22, fontWeight: 800, color: '#f0f0f0', marginTop: 2 }}>{greeting}</h1>
         </div>
-        <div style={{
-          width: 42, height: 42, borderRadius: '50%',
-          background: 'linear-gradient(135deg, #2ef88b, #60a5fa)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 18, fontWeight: 700, color: '#000',
-        }}>W</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {liveData && (
+            <span style={{ fontSize: 10, fontWeight: 700, color: '#2ef88b', background: '#2ef88b18', border: '1px solid #2ef88b30', padding: '3px 8px', borderRadius: 6 }}>
+              ● LIVE
+            </span>
+          )}
+          <button onClick={disconnect} style={{ background: '#181818', border: '1px solid #2a2a2a', borderRadius: 10, padding: '6px 12px', color: '#555', fontSize: 11, fontWeight: 700, cursor: 'pointer' }}>
+            Disconnect
+          </button>
+        </div>
       </div>
 
       {/* ── Recovery Ring + Contributors ─────────────────────────────────── */}
