@@ -10,16 +10,12 @@ export default function WhoopConnect() {
 
   const redirectUri = getRedirectUri();
 
-  async function handleConnect() {
+  function handleConnect() {
     if (!clientId.trim()) { setErr('Paste your Client ID first'); return; }
-    setLoading(true);
     setErr('');
-    try {
-      await auth.login(clientId.trim());
-    } catch (e) {
-      setErr(e.message);
-      setLoading(false);
-    }
+    // Build URL synchronously then redirect — required for iOS Safari
+    const url = auth.buildLoginUrl(clientId.trim());
+    window.location.href = url;
   }
 
   return (

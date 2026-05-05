@@ -2,7 +2,7 @@ const KEYS = {
   access:   'whoop_access_token',
   refresh:  'whoop_refresh_token',
   clientId: 'whoop_client_id',
-  verifier: 'whoop_pkce_verifier',
+  state:    'whoop_oauth_state',
 };
 
 const AUTH_URL  = 'https://api.prod.whoop.com/oauth/oauth2/auth';
@@ -10,15 +10,9 @@ const TOKEN_URL = 'https://api.prod.whoop.com/oauth/oauth2/token';
 const API_BASE  = 'https://api.prod.whoop.com/developer/v1';
 const SCOPES    = 'read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement';
 
-function b64url(buf) {
-  return btoa(String.fromCharCode(...new Uint8Array(buf)))
-    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-}
-
-async function pkce() {
-  const verifier  = b64url(crypto.getRandomValues(new Uint8Array(32)));
-  const challenge = b64url(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)));
-  return { verifier, challenge };
+function randomState() {
+  return btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))))
+    .replace(/[^a-zA-Z0-9]/g, '');
 }
 
 // The redirect URI must match exactly what you register in the WHOOP developer portal
@@ -32,29 +26,27 @@ export const auth = {
   getToken:    () => localStorage.getItem(KEYS.access),
   getClientId: () => localStorage.getItem(KEYS.clientId),
 
-  async login(clientId) {
+  // Build the auth URL synchronously so iOS Safari allows the redirect
+  buildLoginUrl(clientId) {
     localStorage.setItem(KEYS.clientId, clientId);
-    const { verifier, challenge } = await pkce();
-    localStorage.setItem(KEYS.verifier, verifier);
-
+    const state = randomState();
+    localStorage.setItem(KEYS.state, state);
     const params = new URLSearchParams({
-      client_id:             clientId,
-      redirect_uri:          getRedirectUri(),
-      response_type:         'code',
-      scope:                 SCOPES,
-      code_challenge:        challenge,
-      code_challenge_method: 'S256',
+      client_id:     clientId,
+      redirect_uri:  getRedirectUri(),
+      response_type: 'code',
+      scope:         SCOPES,
+      state,
     });
-    window.location.href = `${AUTH_URL}?${params}`;
+    return `${AUTH_URL}?${params}`;
   },
 
   async exchangeCode(code) {
     const body = new URLSearchParams({
-      grant_type:    'authorization_code',
+      grant_type:   'authorization_code',
       code,
-      redirect_uri:  getRedirectUri(),
-      client_id:     localStorage.getItem(KEYS.clientId),
-      code_verifier: localStorage.getItem(KEYS.verifier),
+      redirect_uri: getRedirectUri(),
+      client_id:    localStorage.getItem(KEYS.clientId),
     });
 
     const res = await fetch(TOKEN_URL, {
