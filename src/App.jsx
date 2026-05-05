@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import SleepView from './components/SleepView';
 import StrainView from './components/StrainView';
 import NutritionView from './components/NutritionView';
+import TherapyView from './components/TherapyView';
 import PeptidesView from './components/PeptidesView';
 import JournalView from './components/JournalView';
 import TrendsView from './components/TrendsView';
@@ -14,6 +15,7 @@ const views = {
   sleep:     SleepView,
   strain:    StrainView,
   nutrition: NutritionView,
+  therapy:   TherapyView,
   peptides:  PeptidesView,
   journal:   JournalView,
   trends:    TrendsView,

@@ -2,11 +2,14 @@ import { useState } from 'react';
 import RecoveryRing from './RecoveryRing';
 import MetricPill from './MetricPill';
 import ProgressBar from './ProgressBar';
-import { todayStats } from '../data/mockData';
+import { todayStats, therapyHistory } from '../data/mockData';
 
 export default function Dashboard() {
   const { recovery, sleep, strain, nutrition } = todayStats;
   const strainColor = strain.score >= 14 ? '#ef4444' : strain.score >= 10 ? '#f5a623' : '#60a5fa';
+  const todayTherapy = therapyHistory.at(-1);
+  const coldToday  = todayTherapy.coldPlunge.reduce((s, x) => s + x.durationMin, 0);
+  const saunaToday = todayTherapy.sauna.reduce((s, x) => s + x.durationMin, 0);
 
   return (
     <div style={{ padding: '0 16px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -150,6 +153,40 @@ export default function Dashboard() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Thermal Therapy snapshot */}
+      <div className="card animate-fade-up" style={{ padding: 16 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span>🌡️</span>
+            <span style={{ fontWeight: 700, fontSize: 15 }}>Thermal Therapy</span>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <div style={{
+            flex: 1, padding: '12px', borderRadius: 12,
+            background: '#60a5fa10', border: '1px solid #60a5fa25',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+          }}>
+            <span style={{ fontSize: 22 }}>🧊</span>
+            <p style={{ fontSize: 18, fontWeight: 800, color: '#60a5fa' }}>
+              {coldToday > 0 ? `${coldToday} min` : '—'}
+            </p>
+            <p style={{ fontSize: 10, color: '#4a7fa0', fontWeight: 600, letterSpacing: '0.4px' }}>COLD PLUNGE</p>
+          </div>
+          <div style={{
+            flex: 1, padding: '12px', borderRadius: 12,
+            background: '#f9731610', border: '1px solid #f9731625',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+          }}>
+            <span style={{ fontSize: 22 }}>🔥</span>
+            <p style={{ fontSize: 18, fontWeight: 800, color: '#f97316' }}>
+              {saunaToday > 0 ? `${saunaToday} min` : '—'}
+            </p>
+            <p style={{ fontSize: 10, color: '#9d6040', fontWeight: 600, letterSpacing: '0.4px' }}>SAUNA</p>
+          </div>
         </div>
       </div>
 

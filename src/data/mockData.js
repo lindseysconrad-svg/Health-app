@@ -218,3 +218,47 @@ export const peptideLog = [
   { date: daysAgo(2), name: 'BPC-157', dose: '250 mcg', route: 'SubQ', logged: true },
   { date: daysAgo(2), name: 'TB-500', dose: '2.5 mg', route: 'SubQ', logged: true },
 ];
+
+export const therapyDefaults = {
+  coldPlunge: { tempF: 50, durationMin: 3 },
+  sauna:      { tempF: 185, durationMin: 20 },
+};
+
+// Weekly therapy history — each day can have multiple sessions
+export const therapyHistory = [
+  {
+    date: daysAgo(6),
+    coldPlunge: [{ tempF: 48, durationMin: 3, time: '7:30 AM', feeling: 4 }],
+    sauna:      [{ tempF: 190, durationMin: 20, time: '6:00 PM', rounds: 2, feeling: 5 }],
+  },
+  {
+    date: daysAgo(5),
+    coldPlunge: [],
+    sauna:      [{ tempF: 185, durationMin: 15, time: '7:00 PM', rounds: 1, feeling: 4 }],
+  },
+  {
+    date: daysAgo(4),
+    coldPlunge: [{ tempF: 52, durationMin: 5, time: '8:00 AM', feeling: 5 }],
+    sauna:      [{ tempF: 195, durationMin: 25, time: '5:30 PM', rounds: 3, feeling: 5 }],
+  },
+  {
+    date: daysAgo(3),
+    coldPlunge: [{ tempF: 50, durationMin: 3, time: '7:15 AM', feeling: 3 }],
+    sauna:      [],
+  },
+  {
+    date: daysAgo(2),
+    coldPlunge: [],
+    sauna:      [{ tempF: 180, durationMin: 20, time: '6:30 PM', rounds: 2, feeling: 4 }],
+  },
+  {
+    date: daysAgo(1),
+    coldPlunge: [{ tempF: 46, durationMin: 4, time: '7:00 AM', feeling: 5 }],
+    sauna:      [{ tempF: 190, durationMin: 20, time: '6:00 PM', rounds: 2, feeling: 5 }],
+  },
+  {
+    date: fmt(today),
+    coldPlunge: [{ tempF: 50, durationMin: 3, time: '7:30 AM', feeling: 4 }],
+    sauna:      [],
+  },
+];
