@@ -5,6 +5,17 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[functions]
+  directory = "netlify/functions"
+
+# Explicit route for the token proxy — keeps it reachable even if redirect
+# ordering ever changes. Functions v2 config.path already takes priority, but
+# this makes the intent unambiguous.
+[[redirects]]
+  from = "/api/token"
+  to = "/.netlify/functions/whoop-token"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -63,7 +63,6 @@ export const auth = {
     const data = await res.json();
     localStorage.setItem(KEYS.access, data.access_token);
     if (data.refresh_token) localStorage.setItem(KEYS.refresh, data.refresh_token);
-    localStorage.removeItem(KEYS.verifier);
     return data;
   },
 
