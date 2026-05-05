@@ -6,7 +6,7 @@ const KEYS = {
 };
 
 const AUTH_URL  = 'https://api.prod.whoop.com/oauth/oauth2/auth';
-const TOKEN_URL = 'https://api.prod.whoop.com/oauth/oauth2/token';
+const TOKEN_URL = '/api/token';   // proxied via Netlify function to avoid CORS
 const API_BASE  = 'https://api.prod.whoop.com/developer/v1';
 const SCOPES    = 'read:recovery read:cycles read:sleep read:workout read:profile read:body_measurement';
 
