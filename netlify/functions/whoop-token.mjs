@@ -10,12 +10,16 @@ export default async function handler(req) {
     });
   }
 
-  const body = await req.text();
+  const params = new URLSearchParams(await req.text());
+
+  // Inject client secret server-side so it never touches the browser
+  const secret = process.env.WHOOP_CLIENT_SECRET;
+  if (secret) params.set('client_secret', secret);
 
   const res = await fetch('https://api.prod.whoop.com/oauth/oauth2/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body,
+    body: params.toString(),
   });
 
   const text = await res.text();
