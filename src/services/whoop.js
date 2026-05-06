@@ -17,8 +17,7 @@ function randomState() {
 
 // The redirect URI must match exactly what you register in the WHOOP developer portal
 export function getRedirectUri() {
-  const { origin, pathname } = window.location;
-  return origin + pathname;
+  return window.location.origin;
 }
 
 export const auth = {
